@@ -1,7 +1,13 @@
 """Contains the functions that are required for password generation."""
 
 from inspect import stack
-from random import choice, choices, randint, sample
+from secrets import SystemRandom
+
+_sysrand = SystemRandom()
+choice = _sysrand.choice
+choices = _sysrand.choices
+randint = _sysrand.randint
+sample = _sysrand.sample
 
 from constants import (
     CHARACTERS,
@@ -112,7 +118,7 @@ def get_random_uppercase_flag() -> str:
     print(
         f"""
         Choose a random capitalisation option:
-        {', '.join(RANDOM_CAPS_DISPLAY)}
+        {", ".join(RANDOM_CAPS_DISPLAY)}
         """
     )
 
@@ -217,7 +223,7 @@ def main():
 
     print("\nHello, and welcome to the Password Generator! 🔑")
     print(
-        f">>> To quit at any point, type: {", ".join(f'"{command}"' for command in QUIT_COMMANDS)}"
+        f">>> To quit at any point, type: {', '.join(f'"{command}"' for command in QUIT_COMMANDS)}"
     )
     print()
 
