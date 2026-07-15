@@ -5,6 +5,7 @@ import random
 import pytest
 
 from constants import MAX_LENGTH, MIN_LENGTH, WORDS
+from exceptions import InvalidLengthError, InvalidTypeError
 from password_generation import validate_length
 
 
@@ -25,13 +26,13 @@ def test_validate_length_within_range(length):
     ),
 )
 def test_validate_length_outside_range(length):
-    with pytest.raises(ValueError, match="Invalid length. Please try again."):
+    with pytest.raises(InvalidLengthError, match="Invalid length. Please try again."):
         validate_length(length, MIN_LENGTH, MAX_LENGTH)
 
 
 @pytest.mark.parametrize("non_integer", random.choices(WORDS, k=10))
 def test_validate_length_with_invalid_input(non_integer):
-    with pytest.raises(ValueError, match="Only integers accepted. Please try again."):
+    with pytest.raises(InvalidTypeError, match="Only integers accepted. Please try again."):
         validate_length(non_integer, MIN_LENGTH, MAX_LENGTH)
 
 
