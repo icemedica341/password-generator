@@ -47,7 +47,7 @@ def validate_length(length: str, min_length: int, max_length: int) -> int:
     if int(length) < min_length or int(length) > max_length:
         raise InvalidLengthError
 
-    return True
+    return int(length)
 
 
 def get_valid_length(access_key_range: tuple[int, int]) -> int:
